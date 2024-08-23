@@ -1,13 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <data>
-
-    </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.Material3.Light" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movies_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_layout" />
+
+        <ImageView
+            android:id="@+id/empty_view_iv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintBottom_toTopOf="@+id/empty_view_tv"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@+id/movies_list_rv"
+            app:layout_constraintStart_toStartOf="@+id/movies_list_rv"
+            app:layout_constraintTop_toTopOf="@+id/movies_list_rv"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.3"
+            app:tint="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/empty_view_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_result_found"
+            app:layout_constraintBottom_toBottomOf="@+id/movies_list_rv"
+            app:layout_constraintEnd_toEndOf="@+id/movies_list_rv"
+            app:layout_constraintStart_toStartOf="@+id/movies_list_rv"
+            app:layout_constraintTop_toBottomOf="@+id/empty_view_iv" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/empty_view_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="empty_view_iv,empty_view_tv" />
+
+        <ProgressBar
+            android:id="@+id/movies_list_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/movies_list_rv"
+            app:layout_constraintEnd_toEndOf="@+id/movies_list_rv"
+            app:layout_constraintStart_toStartOf="@+id/movies_list_rv"
+            app:layout_constraintTop_toTopOf="@+id/movies_list_rv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
