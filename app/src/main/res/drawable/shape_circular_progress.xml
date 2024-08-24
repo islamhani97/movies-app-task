@@ -10,18 +10,17 @@
             <solid android:color="?attr/colorPrimary" />
         </shape>
     </item>
-
     <item>
         <shape
             android:innerRadiusRatio="2.5"
             android:shape="ring"
             android:thicknessRatio="16"
             android:useLevel="false">
-            <solid android:color="#818181" />
+            <solid android:color="?attr/colorPrimary" />
         </shape>
     </item>
 
-    <item>
+    <item android:id="@+id/progress_indicator">
         <rotate
             android:fromDegrees="270"
             android:toDegrees="270">
@@ -31,11 +30,10 @@
                 android:thicknessRatio="16"
                 android:useLevel="true">
 
-                <solid android:color="?attr/colorSecondary" />
+                <solid android:color="#FFFFFF" />
             </shape>
         </rotate>
     </item>
-
 
 </layer-list>
 
