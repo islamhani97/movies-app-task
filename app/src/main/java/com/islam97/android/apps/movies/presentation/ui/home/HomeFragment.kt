@@ -25,7 +25,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         get() = R.layout.fragment_home
 
     private val viewModel: HomeViewModel by viewModels()
-    private val moviesAdapter by lazy { MoviesAdapter() }
+    private val moviesAdapter by lazy {
+        MoviesAdapter { movie ->
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(
+                    movie
+                )
+            )
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getMovies()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +54,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         })
         initAdapters()
-        getMovies()
     }
 
     private fun initAdapters() {

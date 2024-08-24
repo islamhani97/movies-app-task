@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.islam97.android.apps.movies.databinding.ItemMovieBinding
 import com.islam97.android.apps.movies.domain.models.Movie
 
-class MoviesAdapter() : PagingDataAdapter<Movie, MoviesAdapter.ItemMovieViewHolder>(DIFF_CALLBACK) {
+class MoviesAdapter(private val onMovieClicked: (movie: Movie) -> Unit) :
+    PagingDataAdapter<Movie, MoviesAdapter.ItemMovieViewHolder>(DIFF_CALLBACK) {
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {
             override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -36,8 +37,8 @@ class MoviesAdapter() : PagingDataAdapter<Movie, MoviesAdapter.ItemMovieViewHold
 
         init {
             itemViewBinding.root.setOnClickListener {
-                getItem(absoluteAdapterPosition)?.let {
-
+                getItem(absoluteAdapterPosition)?.let { movie ->
+                    onMovieClicked.invoke(movie)
                 }
             }
         }

@@ -3,4 +3,5 @@
     <string name="home_title">Movies</string>
     <string name="retry">Retry</string>
     <string name="no_result_found">No Result Found</string>
+    <string name="overview">Overview</string>
 </resources>

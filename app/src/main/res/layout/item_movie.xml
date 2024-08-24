@@ -27,10 +27,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:moviePoster="@{movie.posterPath}" />
+                bind:moviePoster="@{movie.posterPath}" />
 
             <ProgressBar
-                android:id="@+id/vote_progress"
+                android:id="@+id/rating_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminateOnly="false"
@@ -40,21 +40,21 @@
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="@+id/poster"
                 app:layout_constraintTop_toBottomOf="@+id/poster"
-                app:voteProgress="@{movie.voteAverage}" />
+                bind:ratingProgress="@{movie.voteAverage}" />
 
             <TextView
-                android:id="@+id/vote"
+                android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/vote_progress"
-                app:layout_constraintEnd_toEndOf="@+id/vote_progress"
-                app:layout_constraintStart_toStartOf="@+id/vote_progress"
-                app:layout_constraintTop_toTopOf="@+id/vote_progress"
-                app:vote="@{movie.voteAverage}" />
+                app:layout_constraintBottom_toBottomOf="@+id/rating_progress"
+                app:layout_constraintEnd_toEndOf="@+id/rating_progress"
+                app:layout_constraintStart_toStartOf="@+id/rating_progress"
+                app:layout_constraintTop_toTopOf="@+id/rating_progress"
+                bind:rating="@{movie.voteAverage}" />
 
             <TextView
                 android:id="@+id/title"
@@ -65,7 +65,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vote_progress"
+                app:layout_constraintTop_toBottomOf="@+id/rating_progress"
                 app:layout_constraintWidth_percent="0.9" />
 
             <TextView
