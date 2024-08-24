@@ -94,4 +94,7 @@ dependencies {
     /** Paging */
     val pagingVersion = "3.3.2"
     implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
+
+    /** Swipe Refresh Layout */
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }

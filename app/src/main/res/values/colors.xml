@@ -3,4 +3,9 @@
     <color name="black">#CC000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="appPrimaryColor">#712480</color>
+    <color name="appSecondaryColor">#FFC107</color>
+    <color name="progressColorLow">#FF0000</color>
+    <color name="progressColorMedium">#FFC107</color>
+    <color name="progressColorHigh">#4CAF50</color>
 </resources>

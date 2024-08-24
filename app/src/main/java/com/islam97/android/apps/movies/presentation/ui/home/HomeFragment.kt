@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.islam97.android.apps.movies.R
 import com.islam97.android.apps.movies.databinding.FragmentHomeBinding
 import com.islam97.android.apps.movies.presentation.ui.base.BaseFragment
+import com.islam97.android.apps.movies.presentation.utils.setLoading
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -54,16 +55,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         })
         initAdapters()
+        viewBinding.swipeRefreshLayout.setOnRefreshListener {
+            viewBinding.swipeRefreshLayout.isRefreshing = false
+            getMovies()
+        }
     }
 
     private fun initAdapters() {
         viewBinding.moviesListRv.layoutManager = GridLayoutManager(requireContext(), 2)
-        moviesAdapter.addLoadStateListener { loadState ->
-            viewBinding.moviesListProgress.isVisible = loadState.refresh is LoadState.Loading
-            viewBinding.emptyViewGroup.isVisible =
-                (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && moviesAdapter.itemCount < 1) || (loadState.source.refresh is LoadState.Error && moviesAdapter.itemCount < 1)
+        lifecycleScope.launch {
+            moviesAdapter.loadStateFlow.collectLatest { loadState ->
+                viewBinding.moviesListProgress.setLoading(loadState.refresh is LoadState.Loading)
+                viewBinding.emptyViewGroup.isVisible =
+                    (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && moviesAdapter.itemCount < 1) || (loadState.source.refresh is LoadState.Error && moviesAdapter.itemCount < 1)
+            }
         }
-
         with(moviesAdapter) {
             viewBinding.moviesListRv.adapter = withLoadStateHeaderAndFooter(
                 header = ListLoadStateAdapter(this), footer = ListLoadStateAdapter(this)
