@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class GetMoviesUseCase
 @Inject constructor(private val moviesRepository: IMoviesRepository) {
-    suspend fun invoke(): Pager<Int, Movie> {
+    fun invoke(): Pager<Int, Movie> {
         return Pager(config = PagingConfig(pageSize = 20), initialKey = 1) {
             object : PagingSource<Int, Movie>() {
                 override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {

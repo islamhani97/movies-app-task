@@ -27,13 +27,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by viewModels()
     private val moviesAdapter by lazy {
-        MoviesAdapter { movie ->
+        MoviesAdapter(viewModel = viewModel, this, onMovieClicked = { movie ->
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(
                     movie
                 )
             )
-        }
+        }, onFavouriteClicked = { movieId, isFavourite ->
+            viewModel.updateFavourite(movieId, isFavourite)
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +80,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun getMovies() {
-        lifecycleScope.launch() {
+        lifecycleScope.launch {
             viewModel.getMovies().distinctUntilChanged().collectLatest {
                 moviesAdapter.submitData(it)
             }
