@@ -9,7 +9,8 @@ import com.islam97.android.apps.movies.databinding.LoadingLayoutBinding
 
 fun LoadingLayoutBinding.setLoading(loading: Boolean) {
     if (loading) {
-        val animated = AnimatedVectorDrawableCompat.create(root.context, R.drawable.loading_animation)
+        val animated =
+            AnimatedVectorDrawableCompat.create(root.context, R.drawable.loading_animation)
         animated?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
             override fun onAnimationEnd(drawable: Drawable?) {
                 animated.start()
